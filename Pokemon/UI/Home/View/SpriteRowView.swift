@@ -43,18 +43,9 @@ struct SpriteRow: View {
             
             
             
-//            VStack(alignment: .leading, spacing: 5) {
-//                Text(s ?? "nil")
-//                    .font(.headline)
-//                //Text( ?? "nil")
-//            }
-            
-            
-            
-            
         }
         .onAppear {
-            print("this is url_____\(self.url)")
+            //print("this is url_____\(self.url)")
             getSpriteImage(url: self.url)
         }
 

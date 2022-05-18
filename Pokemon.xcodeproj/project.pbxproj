@@ -25,6 +25,7 @@
 		A2DCD10928343A3400A19C89 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DCD10828343A3400A19C89 /* SearchBarView.swift */; };
 		A2E2FD4128351260002CECFF /* PokemonDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E2FD4028351260002CECFF /* PokemonDetails.swift */; };
 		A2E2FD4328352254002CECFF /* SpriteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E2FD4228352254002CECFF /* SpriteRowView.swift */; };
+		A2E2FD46283559F8002CECFF /* APIServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E2FD45283559F8002CECFF /* APIServiceProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		A2DCD10828343A3400A19C89 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		A2E2FD4028351260002CECFF /* PokemonDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetails.swift; sourceTree = "<group>"; };
 		A2E2FD4228352254002CECFF /* SpriteRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteRowView.swift; sourceTree = "<group>"; };
+		A2E2FD45283559F8002CECFF /* APIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 		A2897C552834B03000E6B023 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				A2E2FD44283559C7002CECFF /* Protocol */,
 				A2897C572834B05200E6B023 /* Response */,
 				A2897C562834B03700E6B023 /* Model */,
 				A2897C582834B06900E6B023 /* Service.swift */,
@@ -214,6 +217,14 @@
 				A2E2FD4228352254002CECFF /* SpriteRowView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		A2E2FD44283559C7002CECFF /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				A2E2FD45283559F8002CECFF /* APIServiceProtocol.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,6 +365,7 @@
 				A2DCD0DB283409EC00A19C89 /* ContentView.swift in Sources */,
 				A2E2FD4328352254002CECFF /* SpriteRowView.swift in Sources */,
 				A2897C662834D56500E6B023 /* DetailsView.swift in Sources */,
+				A2E2FD46283559F8002CECFF /* APIServiceProtocol.swift in Sources */,
 				A2897C612834B23800E6B023 /* Pokemon.swift in Sources */,
 				A2897C682834D68500E6B023 /* ListView.swift in Sources */,
 				A2DCD0D9283409EC00A19C89 /* PokemonApp.swift in Sources */,

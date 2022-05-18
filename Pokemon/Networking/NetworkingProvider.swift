@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NetworkingProvider {
+class NetworkingProvider : APIServiceProtocol {
     static let share = NetworkingProvider()
 
     func getPokemons( success: @escaping (_ pokemon: [Pokemon]) -> (), failure: @escaping (_ error: Error?) -> () ) {
@@ -51,15 +51,15 @@ class NetworkingProvider {
         
     }
     
-    //MARK: In order to access a pokemon character's sprite image,
+    //MARK: One of the ways to access a pokemon character's sprite image,
     // add {index+1} value at the end of the request url.
     // the index number can be obtained from allPokemonList response.
     
-    func getSpriteImageUrl(index: Int) -> String {
-        
-        let spriteImageUrl = Service.baseUrlImageSprite + "\(index+1)" + ".png"
-        
-        return spriteImageUrl
-
-    }
+//    func getSpriteImageUrl(index: Int) -> String {
+//
+//        let spriteImageUrl = Service.baseUrlImageSprite + "\(index+1)" + ".png"
+//
+//        return spriteImageUrl
+//
+//    }
 }

@@ -35,7 +35,7 @@ struct HomeView: View {
                     }
                     .searchable(text: $searchText)
                     .navigationTitle("Pokemon List")
-
+                
                 }
 
         .onAppear {
