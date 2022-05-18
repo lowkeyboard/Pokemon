@@ -27,4 +27,39 @@ class NetworkingProvider {
             
         }.resume()
     }
+    
+    func getSprite(url: String, success: @escaping (PokemonSprites) -> ()) {
+        guard let url = URL(string: url) else { return }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else { return }
+            
+            if (data.isEmpty == false) {
+
+            let pokemonSpriteDecoded = try! JSONDecoder().decode(PokemonDetails.self, from: data)
+                
+                DispatchQueue.main.async {
+                    success(pokemonSpriteDecoded.sprites)
+                }
+
+            } else {
+                print("no DATA from pokemon detail api ")
+            }
+
+        }.resume()
+        
+        
+    }
+    
+    //MARK: In order to access a pokemon character's sprite image,
+    // add {index+1} value at the end of the request url.
+    // the index number can be obtained from allPokemonList response.
+    
+    func getSpriteImageUrl(index: Int) -> String {
+        
+        let spriteImageUrl = Service.baseUrlImageSprite + "\(index+1)" + ".png"
+        
+        return spriteImageUrl
+
+    }
 }

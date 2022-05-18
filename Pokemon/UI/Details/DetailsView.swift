@@ -10,10 +10,12 @@ import SwiftUI
 struct DetailsView: View {
     let detailPokemon: Pokemon
     
+    
     var body: some View {
         VStack(alignment: .center) {
-            Text("Details View").font(.system(size: 22))
+            Text("Details View \(detailPokemon.name)").font(.system(size: 22))
         }
+        
     }
 }
 
