@@ -12,15 +12,15 @@ struct PokemonDetails : Codable {
     var weight: Int
     
     //todo: codable versions needed for further details.
-    var abilities: String?
-    var forms: String?
-    var gameIndices: String?
-    var moves: String?
-
-    var species: String?
+//    var abilities: String?
+//    var forms: String?
+//    var gameIndices: String?
+//    var moves: String?
+//
+//    var species: String?
 //    var sprites: String?
-    var stats: String?
-    var types: String
+ //   var stats: String?
+ //   var types: String
 }
 
 struct PokemonSprites : Codable {

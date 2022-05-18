@@ -9,24 +9,20 @@ import SwiftUI
 
 struct SpriteRow: View {
     @State private var Sprite = PokemonSprites()
-    let imageSize: CGFloat = 100
-    @State private var url = ""
-    let index: Int
+    let imageSize: CGFloat = 40
+    var url: String
     let weight: Int = 0
     
     var body: some View {
         HStack {
-            
             if Sprite.front_default != nil {
-                AsyncImage(url: URL(string: url)) { phase in
+                AsyncImage(url: URL(string: Sprite.front_default!)) { phase in
                     if let image = phase.image {
                         image.resizable()
                             .scaledToFill()
                             .frame(width: imageSize, height: imageSize)
                             .clipped()
-                            .onAppear {
-                                self.url =  getSpriteImage(index: self.index)
-                            }
+                            
                         
                      } else if phase.error != nil {
                          
@@ -39,27 +35,39 @@ struct SpriteRow: View {
                      }
                     
                 }
+                               
+
             }else {
                 Color.gray.frame(width: imageSize, height: imageSize)
             }
             
-            VStack(alignment: .leading, spacing: 5) {
-                Text(Sprite.front_default ?? "nil")
-                    .font(.headline)
-                //Text( ?? "nil")
-            }
+            
+            
+//            VStack(alignment: .leading, spacing: 5) {
+//                Text(s ?? "nil")
+//                    .font(.headline)
+//                //Text( ?? "nil")
+//            }
+            
             
             
             
         }
+        .onAppear {
+            print("this is url_____\(self.url)")
+            getSpriteImage(url: self.url)
+        }
+
         
         
         
      
     }
     
-    func getSpriteImage(index: Int) -> String {
+    func getSpriteImage(url: String) {
         
-        return NetworkingProvider.share.getSpriteImageUrl(index: index)
+        return NetworkingProvider.share.getSprite(url: url) { PokemonSprites in
+            self.Sprite = PokemonSprites
+        }
     }
 }

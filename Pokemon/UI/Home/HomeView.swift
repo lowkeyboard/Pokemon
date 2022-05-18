@@ -22,12 +22,12 @@ struct HomeView: View {
                          , id:\.self ) {
                             pok in
                             HStack {
-                                Text("\(pok.name)")
+                                SpriteRow(url: pok.url)
                                 NavigationLink {
-                                    
                                     DetailsView(detailPokemon: pok)
                                 } label: {
-                                    SpriteRow( index: self.getIndexOf(pok))
+                                    Text("\(pok.name)")
+
                                     
                                 }
                             }
