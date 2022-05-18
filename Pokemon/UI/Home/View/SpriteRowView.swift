@@ -58,7 +58,9 @@ struct SpriteRow: View {
     func getSpriteImage(url: String) {
         
         return NetworkingProvider.share.getSprite(url: url) { PokemonSprites in
+            
             self.Sprite = PokemonSprites
+        
         }
     }
 }

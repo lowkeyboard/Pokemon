@@ -14,7 +14,7 @@ enum Service {
     enum Endpoint {
         static let allPokemonList = Service.baseUrl + "pokemon"
         //static let searchPokemon = Service.baseUrl +
-        static let getPokemon = Service.baseUrl + "/"
+        //static let selectedPokemonBreed = Service.baseUrl + "{index+1}"
         
         
         //details -- index will be obtained from allPokemonList

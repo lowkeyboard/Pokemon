@@ -36,7 +36,7 @@ class NetworkingProvider : APIServiceProtocol {
             
             if (data.isEmpty == false) {
 
-            let pokemonSpriteDecoded = try! JSONDecoder().decode(PokemonDetails.self, from: data)
+            let pokemonSpriteDecoded = try! JSONDecoder().decode(PokemonSpriteResponse.self, from: data)
                 
                 DispatchQueue.main.async {
                     success(pokemonSpriteDecoded.sprites)

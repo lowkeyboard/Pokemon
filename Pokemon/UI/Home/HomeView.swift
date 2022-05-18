@@ -24,10 +24,9 @@ struct HomeView: View {
                             HStack {
                                 SpriteRow(url: pok.url)
                                 NavigationLink {
-                                    DetailsView(detailPokemon: pok)
+                                    DetailsView(detailPokemon: pok, index: self.getIndexOf(pok) )
                                 } label: {
-                                    Text("\(pok.name)")
-
+                                    Text("\(self.getIndexOf(pok)) -> \(pok.name)")
                                     
                                 }
                             }
