@@ -10,10 +10,9 @@ import SwiftUI
 struct DetailsView: View {
     let detailPokemon: Pokemon
     let index: Int
-
+    @State private var flavorTextEntry = [FlavorTextEntry]()
+    
     var body: some View {
-        
-        
         ZStack{
             ScrollView {
                 
@@ -21,8 +20,8 @@ struct DetailsView: View {
                     .font(.title)
                     .fontWeight(.bold)
                     .padding(.top, 50)
-
-
+                
+                
                 ImageView(detailPokemon: self.detailPokemon, index: self.index)
                     .clipShape(Circle())
                     .overlay(Circle().strokeBorder(Color(uiColor: .white), lineWidth: 5))
@@ -30,40 +29,47 @@ struct DetailsView: View {
                 Spacer(minLength: UIScreen.main.bounds.width * 0.2)
                 
                 DescriptionView()
-                    
-
-
+                
+                
+                
             }
-
+            
         }
-
+        
         .padding()
         .background(Color("Color2"))
         .frame(maxHeight: .infinity, alignment: .bottom)
         .edgesIgnoringSafeArea([.top, .bottom])
+        
+        
+        
+        .onAppear {
+            NetworkingProvider.share.getSelectedDetails(index: self.index) { entry in
+                self.flavorTextEntry = entry
+                print(flavorTextEntry.description)
+            } failure: { error in
+                print(error)
+            }
 
+        }
 
-        
-        
-        
     }
     
-    func getSelectedDetails(index: Int){
-        
-    }
+    
+    
+    
+    
+    
 }
 
 
 
 
-struct DetailsView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailsView(detailPokemon: Pokemon.init( name: "charizard", url: Service.Endpoint.allPokemonList+"/5"), index: 5)
-    }
-}
 
 struct DescriptionView: View {
+    
     var body: some View {
+        
         VStack (alignment: .leading) {
             Text("Characteristics")
                 .font(.title)
@@ -106,48 +112,48 @@ struct DescriptionView: View {
             .padding(.vertical)
             
             HStack {
-               
-                    Button(action: {}) {
-                        Image(systemName: "minus")
-                            .padding(.all, 8)
-                        
-                    }
-                    .frame(width: 30, height: 30)
-                    .overlay(RoundedCorner(radius: 50).stroke())
-                    .foregroundColor(.black)
+                
+                Button(action: {}) {
+                    Image(systemName: "minus")
+                        .padding(.all, 8)
                     
-                    Text("1")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .padding(.horizontal, 8)
-                    
-                    //                        Plus Button
-                    Button(action: {}) {
-                        Image(systemName: "plus")
-                            .foregroundColor(.white)
-                            .padding(.all, 8)
-                            .background(Color("Primary"))
-                            .clipShape(Circle())
-                    }
+                }
+                .frame(width: 30, height: 30)
+                .overlay(RoundedCorner(radius: 50).stroke())
+                .foregroundColor(.black)
+                
+                Text("1")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                    .padding(.horizontal, 8)
+                
+                //                        Plus Button
                 
                 
             }
         }
         .padding()
         .background(Color("Color2"))
-//        .cornerRadius(40)
+        //        .cornerRadius(40)
         .offset(x: 0, y: -30.0)
     }
+    
     
 }
 
 struct RoundedCorner: Shape {
-
+    
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
-
+    
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)
+    }
+}
+
+struct DetailsView_Previews: PreviewProvider {
+    static var previews: some View {
+        DetailsView(detailPokemon: Pokemon.init( name: "charizard", url: Service.allPokemonList+"/5"), index: 5)
     }
 }

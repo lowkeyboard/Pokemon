@@ -69,6 +69,6 @@ struct PokemonCell: View {
 
 struct PokemonCell_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonCell(url: Service.Endpoint.allPokemonList+"/5", name: "charizard", index: 5)
+        PokemonCell(url: Service.allPokemonList+"/5", name: "charizard", index: 5)
     }
 }
