@@ -32,25 +32,24 @@ class NetworkingProvider : APIServiceProtocol {
     //MARK - DetailView Requests
     // example: https://pokeapi.co/api/v2/pokemon-species/5
     
+    
+    
     func getSelectedDetails(index: Int, success: @escaping (_ flavorTextEntry: String?) -> (), failure: @escaping (_ error: Error?) -> () ) {
-        guard let url = URL(string: Service.detailedSpecies + "\(index+1)") else { return }
+        guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon-species/5") else { return }
         print("URL_________=\(url)")
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if (data?.isEmpty == false) {
-//                let pokemonDecoded = try! JSONDecoder().decode(PokemonSpeciesResponse.self, from: data!)
-                print(data)
-                   let pokemonDecoded = try! JSONDecoder().decode(PokemonSpeciesResponse.self, from: data!)
-
+        URLSession.shared.dataTask(with: url) { (data, _, error) in
+            guard let data = data else { return }
+            do {
+                let result = try JSONDecoder().decode(PokemonDescription.self, from: data)
                 DispatchQueue.main.async {
-                    
-                    success("pokemonDecoded.flavor_text_entries")
+                    // Check and get first pokemon description in English
+                    for index in 0..<result.flavor_text_entries.count {
+                        if result.flavor_text_entries[index].language.name == "en" {
+                             success(result.flavor_text_entries[index].flavor_text)
+                        }
+                    }
                 }
-
-            } else {
-                print("no DATA from pokemon api ")
-                failure(error)
-            }
-            
+            } catch let error { print(error) }
         }.resume()
     }
 

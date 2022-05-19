@@ -12,17 +12,14 @@
 
 import Foundation
 
-
-// MARK: - PokemonSpeciesResponse
-struct PokemonSpeciesResponse : Decodable {
-    let flavor_text_entries: [[String?: [FlavorTextEntry]]]
+struct PokemonDescription: Codable {
+    let flavor_text_entries: [FlavorTextEntries]
+}
+struct FlavorTextEntries: Codable {
+    let flavor_text: String
+    let language: Language
 }
 
-// MARK: - FlavorTextEntry
-struct FlavorTextEntry: Codable {
-    let flavor_text: String?
-    let language: [Language]
-}
 
 // MARK: - Language
 struct Language : Codable{
@@ -30,5 +27,8 @@ struct Language : Codable{
     var url: String?
 }
 
-
-
+// MARK: - Language
+struct Version : Codable{
+    var name: String?
+    var url: String?
+}
