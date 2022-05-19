@@ -11,7 +11,7 @@ class NetworkingProvider : APIServiceProtocol {
     static let share = NetworkingProvider()
 
     func getPokemons( success: @escaping (_ pokemon: [Pokemon]) -> (), failure: @escaping (_ error: Error?) -> () ) {
-        guard let url = URL(string: Service.Endpoint.allPokemonList) else { return }
+        guard let url = URL(string: Service.Endpoint.allPokemonList+"?limit=100") else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             if (data?.isEmpty == false) {

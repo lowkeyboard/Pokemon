@@ -42,17 +42,11 @@ struct HomeView: View {
                     
 
                     ScrollView(.vertical, showsIndicators: false) {
-                        LazyVGrid(columns: columns, spacing: 20) {
+                        LazyVGrid(columns: columns, spacing: 15) {
                             ForEach(searchText == ""
                                     ? pokemon: pokemon.filter({$0.name.lowercased().contains(searchText.lowercased())})
                                     , id:\.self ) {
                                 pok in
-                                    //SpriteRow(url: pok.url)
-    //DetailsView(detailPokemon: pok, index: getIndexOf(pok))
-
-//                                PokemonCell(url: pok.url, name: pok.name, index: self.getIndexOf(pok)).onTapGesture {
-//                                    print("Tapped")
-//                                }
                                                                 
                                 NavigationLink(destination:DetailsView(detailPokemon: pok, index: getIndexOf(pok))) {
                                 
@@ -62,7 +56,7 @@ struct HomeView: View {
 
 
                                 }
-                                }
+                        }
                         
                             }
                             

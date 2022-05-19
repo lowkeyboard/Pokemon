@@ -16,10 +16,10 @@ struct ImageView: View {
         AsyncImage(url: URL(string: "\(Service.baseUrlImageSprite)\(index+1).png")) { phase in
             if let image = phase.image {
                 image.resizable()
-                    .scaledToFill()
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2, alignment: .topLeading)
+                    .scaledToFit()
+                    .frame(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.height * 0.25, alignment: .topLeading)
                     .cornerRadius(55)
-                    .background(.gray.opacity(0.3))
+                    //.background(.gray.opacity(0.3))
                     .clipShape(RoundedRectangle(cornerRadius: 20))
                     .padding()
                 
