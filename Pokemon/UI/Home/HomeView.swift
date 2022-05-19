@@ -18,58 +18,69 @@ struct HomeView: View {
     
     var body: some View {
 
-        ZStack {
+        NavigationView {
+            ZStack {
 
-            VStack (alignment: .leading){
-                
-                Text(" Pokemon Library")
-                    .font(.title)
-                    .foregroundColor(.cyan)
-                    .padding(.top, 30)
-                
-                SearchBar(text: $searchText)
-                    .padding(.top, 20)
-                
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 30){
-                        ForEach(0..<categories.count, id: \.self){ data in
-                            
-                            CategoriesView(data: data, index: $categoryIndex)
-                        }
-                    }
-                }.padding(.top, 30)
-                
-
-                ScrollView(.vertical, showsIndicators: false) {
-                    LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(searchText == ""
-                                ? pokemon: pokemon.filter({$0.name.lowercased().contains(searchText.lowercased())})
-                                , id:\.self ) {
-                            pok in
-                                //SpriteRow(url: pok.url)
-
-
-                                PokemonCell(url: pok.url, name: pok.name, index: self.getIndexOf(pok))
-
-                            }
-                            }
+                VStack (alignment: .leading){
                     
+                    Text(" Pokemon Library")
+                        .font(.title)
+                        .foregroundColor(.cyan)
+                        .padding(.top, 10)
+                    
+                    SearchBar(text: $searchText)
+                        .padding(.top, 20)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 30){
+                            ForEach(0..<categories.count, id: \.self){ data in
+                                
+                                CategoriesView(data: data, index: $categoryIndex)
+                            }
+                        }
+                    }.padding(.top, 30)
+                    
+
+                    ScrollView(.vertical, showsIndicators: false) {
+                        LazyVGrid(columns: columns, spacing: 20) {
+                            ForEach(searchText == ""
+                                    ? pokemon: pokemon.filter({$0.name.lowercased().contains(searchText.lowercased())})
+                                    , id:\.self ) {
+                                pok in
+                                    //SpriteRow(url: pok.url)
+    //DetailsView(detailPokemon: pok, index: getIndexOf(pok))
+
+//                                PokemonCell(url: pok.url, name: pok.name, index: self.getIndexOf(pok)).onTapGesture {
+//                                    print("Tapped")
+//                                }
+                                                                
+                                NavigationLink(destination:DetailsView(detailPokemon: pok, index: getIndexOf(pok))) {
+                                
+                                    PokemonCell(url: pok.url, name: pok.name, index: self.getIndexOf(pok))
+
+                                }
+
+
+                                }
+                                }
+                        
+                            }
+                            
                         }
                         
                     }
-                    
+                
+            
+            .onAppear {
+                NetworkingProvider.share.getPokemons { pokemon in
+                    //print(pokemon)
+                    self.pokemon = pokemon
+                } failure: { error in
+                    print(error)
                 }
-            
-        
-        .onAppear {
-            NetworkingProvider.share.getPokemons { pokemon in
-                //print(pokemon)
-                self.pokemon = pokemon
-            } failure: { error in
-                print(error)
-            }
-            
+                
         }.padding(.horizontal, 20)
+        }
         
         
     }
