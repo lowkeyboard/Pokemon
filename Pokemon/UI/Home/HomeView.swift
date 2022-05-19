@@ -14,44 +14,52 @@ struct HomeView: View {
     var columns = Array(repeating: GridItem(.flexible()), count: 2)
     @State var categoryIndex = 0
     @State var text = ""
-
+    var categories = ["Category1", "Category2", "Category3", "Category4"]
+    
     var body: some View {
-        NavigationView {
 
-        VStack (alignment: .leading){
+        ZStack {
 
-                Text(" PokemonLibrary")
-                            .font(.title)
-                            .padding(.top, 30)
-                        .foregroundColor(.cyan)
-                        .padding(.top, 10)
-            SearchBar(text: $searchText)
+            VStack (alignment: .leading){
+                
+                Text(" Pokemon Library")
+                    .font(.title)
+                    .foregroundColor(.cyan)
+                    .padding(.top, 30)
+                
+                SearchBar(text: $searchText)
+                    .padding(.top, 20)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 30){
+                        ForEach(0..<categories.count, id: \.self){ data in
+                            
+                            CategoriesView(data: data, index: $categoryIndex)
+                        }
+                    }
+                }.padding(.top, 30)
+                
+
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(searchText == ""
                                 ? pokemon: pokemon.filter({$0.name.lowercased().contains(searchText.lowercased())})
                                 , id:\.self ) {
                             pok in
-                            HStack {
-//                                //SpriteRow(url: pok.url)
-//                                NavigationLink {
-//                                    DetailsView(detailPokemon: pok, index: self.getIndexOf(pok) )
-//                                } label: {
-                                    PokemonCell(url: pok.url, name: pok.name, index: self.getIndexOf(pok))
-                               // }
+                                //SpriteRow(url: pok.url)
+
+
+                                PokemonCell(url: pok.url, name: pok.name, index: self.getIndexOf(pok))
+
                             }
-
+                            }
+                    
                         }
-
+                        
                     }
-
+                    
                 }
-            }
-            }
-            //                    .searchable(text: $searchText)
-            //                    .navigationTitle("Pokemon List")
             
-        
         
         .onAppear {
             NetworkingProvider.share.getPokemons { pokemon in
@@ -61,7 +69,8 @@ struct HomeView: View {
                 print(error)
             }
             
-        }
+        }.padding(.horizontal, 20)
+        
         
     }
     
