@@ -23,7 +23,7 @@ struct PokemonCell: View {
                     .padding(.leading)
                 
                 HStack {
-                    Text("poison")
+                    Text("#\(index)")
                         .font(.subheadline).bold()
                         .foregroundColor(.white)
                         .padding(.horizontal, 16)
@@ -57,7 +57,7 @@ struct PokemonCell: View {
             }
         }
         
-        .background(Color.green)
+        .background(Color.orange)
         .cornerRadius(12)
     }
 }

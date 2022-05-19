@@ -16,23 +16,16 @@ struct HomeView: View {
     @State var text = ""
 
     var body: some View {
-        
-        ZStack {
-            VStack (alignment: .leading){
-                HStack {
-                    Image("menu")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                    
-                    Spacer()
-                    
-                    Image(systemName: "cart")
-                        .font(.system(size: 20))
-                        .foregroundColor(Color("Color4"))
-                }
-            }
-            NavigationView {
-                
+        NavigationView {
+
+        VStack (alignment: .leading){
+
+                Text(" PokemonLibrary")
+                            .font(.title)
+                            .padding(.top, 30)
+                        .foregroundColor(.cyan)
+                        .padding(.top, 10)
+            SearchBar(text: $searchText)
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(searchText == ""
@@ -40,23 +33,25 @@ struct HomeView: View {
                                 , id:\.self ) {
                             pok in
                             HStack {
-
-                                //SpriteRow(url: pok.url)
-                                NavigationLink {
-                                    DetailsView(detailPokemon: pok, index: self.getIndexOf(pok) )
-                                } label: {
+//                                //SpriteRow(url: pok.url)
+//                                NavigationLink {
+//                                    DetailsView(detailPokemon: pok, index: self.getIndexOf(pok) )
+//                                } label: {
                                     PokemonCell(url: pok.url, name: pok.name, index: self.getIndexOf(pok))
-                                }
+                               // }
                             }
+
                         }
+
                     }
+
                 }
             }
-            
+            }
             //                    .searchable(text: $searchText)
             //                    .navigationTitle("Pokemon List")
             
-        }
+        
         
         .onAppear {
             NetworkingProvider.share.getPokemons { pokemon in
