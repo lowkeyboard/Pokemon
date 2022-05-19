@@ -10,7 +10,8 @@ import SwiftUI
 struct DetailsView: View {
     let detailPokemon: Pokemon
     let index: Int
-    @State private var flavorTextEntry = [FlavorTextEntry]()
+//    @State private var flavorTextEntry = FlavorTextEntry(flavorText: "", language: Language(name: "", url: "")[], version: Language(name: "", url: ""))
+
     
     var body: some View {
         ZStack{
@@ -45,8 +46,11 @@ struct DetailsView: View {
         
         .onAppear {
             NetworkingProvider.share.getSelectedDetails(index: self.index) { entry in
-                self.flavorTextEntry = entry
-                print(flavorTextEntry.description)
+                guard let response = entry else { return
+                }
+                print(response.first)
+                
+                print(entry)
             } failure: { error in
                 print(error)
             }
