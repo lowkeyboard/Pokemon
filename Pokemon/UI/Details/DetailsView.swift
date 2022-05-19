@@ -10,11 +10,29 @@ import SwiftUI
 struct DetailsView: View {
     let detailPokemon: Pokemon
     let index: Int
-    
+
     var body: some View {
-        VStack(alignment: .center) {
-            Text("Details View \(detailPokemon.name) at the index\(self.index)").font(.system(size: 22))
+        
+        ScrollView {
+                
+                Text(" \(detailPokemon.name)")
+                    .foregroundColor(.purple)
+                
+                    .fontWeight(.heavy)
+                    .font(.monospaced(.largeTitle)())
+                
+                Spacer()
+                Text("#\(self.index) ")
+                    .font(.monospaced(.title2)())
+                
+            
+
+            ImageView(detailPokemon: self.detailPokemon, index: self.index)
+            Text("sdasdas")
+
+
         }
+        
         
     }
     
@@ -28,6 +46,6 @@ struct DetailsView: View {
 
 struct DetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailsView(detailPokemon: Pokemon.init( name: "pikacu", url: "url"), index: 2)
+        DetailsView(detailPokemon: Pokemon.init( name: "charizard", url: Service.Endpoint.allPokemonList+"/5"), index: 5)
     }
 }

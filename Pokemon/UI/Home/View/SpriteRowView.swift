@@ -35,9 +35,7 @@ struct SpriteRow: View {
                      }
                     
                 }
-                               
-
-            }else {
+            } else {
                 Color.gray.frame(width: imageSize, height: imageSize)
             }
             

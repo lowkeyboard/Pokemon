@@ -5,11 +5,13 @@
 //  Created by cagla copuroglu on 18.05.2022.
 //
 
+//MARK - This file contains api endpoints for Networking Provider to make requests.
+
 import Foundation
 
 enum Service {
     static let baseUrl = "https://pokeapi.co/api/v2/"
-    static let baseUrlImageSprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon"
+    static let baseUrlImageSprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
     
     enum Endpoint {
         static let allPokemonList = Service.baseUrl + "pokemon"
