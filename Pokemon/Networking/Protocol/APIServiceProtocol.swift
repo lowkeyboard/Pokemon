@@ -12,5 +12,9 @@ protocol APIServiceProtocol {
     
     func getSprite(url: String, success: @escaping (PokemonSprites) -> ())
     
+    func getFlavorTextEntry(index: Int, success: @escaping (_ flavorTextEntry: String?) -> (), failure: @escaping (_ error: Error?) -> () )
+    
+    
+
     
 }

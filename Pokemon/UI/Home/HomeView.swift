@@ -17,19 +17,19 @@ struct HomeView: View {
     var categories = ["Category1", "Category2", "Category3", "Category4"]
     
     var body: some View {
-
+        
         NavigationView {
+            
+            
             ZStack {
-
+                
                 VStack (alignment: .leading){
-                    
                     Text(" Pokemon Library")
                         .font(.title)
-                        .foregroundColor(.cyan)
-                        .padding(.top, 10)
+                        .foregroundColor(.red)
+                    
                     
                     SearchBar(text: $searchText)
-                        .padding(.top, 20)
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 30){
@@ -38,32 +38,39 @@ struct HomeView: View {
                                 CategoriesView(data: data, index: $categoryIndex)
                             }
                         }
-                    }.padding(.top, 30)
+                    }.padding(.top, 10)
                     
-
+                    
                     ScrollView(.vertical, showsIndicators: false) {
+                        
+                        
                         LazyVGrid(columns: columns, spacing: 15) {
+                            
                             ForEach(searchText == ""
                                     ? pokemon: pokemon.filter({$0.name.lowercased().contains(searchText.lowercased())})
                                     , id:\.self ) {
                                 pok in
-                                                                
-                                NavigationLink(destination:DetailsView(detailPokemon: pok, index: getIndexOf(pok))) {
                                 
+                                NavigationLink(destination:DetailsView(detailPokemon: pok, index: getIndexOf(pok))) {
+                                    
                                     PokemonCell(url: pok.url, name: pok.name, index: self.getIndexOf(pok))
-
+                                    
                                 }
-
-
-                                }
-                        }
-                        
+                                
+                                
                             }
-                            
                         }
                         
-                    }
+                        
+                    }.background(Color("subfont"))
+                    
+                }.padding(.horizontal, 2)
                 
+                
+            }
+            
+            
+            
             
             .onAppear {
                 NetworkingProvider.share.getPokemons { pokemon in
@@ -73,8 +80,9 @@ struct HomeView: View {
                     print(error)
                 }
                 
-        }.padding(.horizontal, 20)
+            }
         }
+        
         
         
     }

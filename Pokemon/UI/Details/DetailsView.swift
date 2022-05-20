@@ -11,6 +11,7 @@ struct DetailsView: View {
     let detailPokemon: Pokemon
     let index: Int
     @State private var flavorTextEntry = ""
+    @State private var shapeText = ""
 
     
     var body: some View {
@@ -45,13 +46,17 @@ struct DetailsView: View {
         
         
         .onAppear {
-            NetworkingProvider.share.getSelectedDetails(index: self.index) { entry in
+            NetworkingProvider.share.getFlavorTextEntry(index: self.index) { entry in
                 guard let response = entry else { return
                 }
+                
                 flavorTextEntry = response
             } failure: { error in
                 print(error)
             }
+            
+
+            
 
         }
 
@@ -71,7 +76,7 @@ struct DetailsView: View {
 struct DescriptionView: View {
     
 var descriptionText: String
-    
+
     var body: some View {
         
         VStack (alignment: .leading) {
@@ -92,7 +97,7 @@ var descriptionText: String
                     Text("Size")
                         .font(.system(size: 16))
                         .fontWeight(.semibold)
-                    Text("Height: 120 cm")
+                    Text("Height: 72 cm")
                         .opacity(0.6)
                     Text("Wide: 80 cm")
                         .opacity(0.6)

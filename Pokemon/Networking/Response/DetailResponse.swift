@@ -15,6 +15,8 @@ import Foundation
 struct PokemonDescription: Codable {
     let flavor_text_entries: [FlavorTextEntries]
 }
+
+// MARK: - FlavorTextEntries
 struct FlavorTextEntries: Codable {
     let flavor_text: String
     let language: Language
@@ -32,3 +34,5 @@ struct Version : Codable{
     var name: String?
     var url: String?
 }
+
+

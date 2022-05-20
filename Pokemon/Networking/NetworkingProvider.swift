@@ -29,12 +29,11 @@ class NetworkingProvider : APIServiceProtocol {
         }.resume()
     }
     
-    //MARK - DetailView Requests
+    
+    //MARK - DetailView Request
     // example: https://pokeapi.co/api/v2/pokemon-species/5
     
-    
-    
-    func getSelectedDetails(index: Int, success: @escaping (_ flavorTextEntry: String?) -> (), failure: @escaping (_ error: Error?) -> () ) {
+    func getFlavorTextEntry(index: Int, success: @escaping (_ flavorTextEntry: String?) -> (), failure: @escaping (_ error: Error?) -> () ) {
         guard let url = URL(string: "\(Service.detailedSpecies)\(index)") else { return }
         print("URL_________=\(url)")
         URLSession.shared.dataTask(with: url) { (data, _, error) in
@@ -48,11 +47,13 @@ class NetworkingProvider : APIServiceProtocol {
                              success(result.flavor_text_entries[index].flavor_text)
                         }
                     }
+                    
+                    
                 }
             } catch let error { print(error) }
         }.resume()
     }
-
+    
     
     
     func getSprite(url: String, success: @escaping (PokemonSprites) -> ()) {
@@ -78,15 +79,4 @@ class NetworkingProvider : APIServiceProtocol {
         
     }
     
-    //MARK: One of the ways to access a pokemon character's sprite image,
-    // add {index+1} value at the end of the request url.
-    // the index number can be obtained from allPokemonList response.
-    
-//    func getSpriteImageUrl(index: Int) -> String {
-//
-//        let spriteImageUrl = Service.baseUrlImageSprite + "\(index+1)" + ".png"
-//
-//        return spriteImageUrl
-//
-//    }
 }
