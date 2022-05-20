@@ -10,7 +10,7 @@ import SwiftUI
 struct DetailsView: View {
     let detailPokemon: Pokemon
     let index: Int
-//    @State private var flavorTextEntry = FlavorTextEntry(flavorText: "", language: Language(name: "", url: "")[], version: Language(name: "", url: ""))
+    @State private var flavorTextEntry = ""
 
     
     var body: some View {
@@ -29,7 +29,7 @@ struct DetailsView: View {
                 
                 Spacer(minLength: UIScreen.main.bounds.width * 0.2)
                 
-                DescriptionView()
+                DescriptionView(descriptionText: flavorTextEntry)
                 
                 
                 
@@ -48,9 +48,7 @@ struct DetailsView: View {
             NetworkingProvider.share.getSelectedDetails(index: self.index) { entry in
                 guard let response = entry else { return
                 }
-                print(response.first)
-                
-                print(entry)
+                flavorTextEntry = response
             } failure: { error in
                 print(error)
             }
@@ -72,6 +70,8 @@ struct DetailsView: View {
 
 struct DescriptionView: View {
     
+var descriptionText: String
+    
     var body: some View {
         
         VStack (alignment: .leading) {
@@ -82,7 +82,7 @@ struct DescriptionView: View {
             Text("Description")
                 .fontWeight(.medium)
                 .padding(.vertical, 8)
-            Text("Luxury Swedian Chair is a contemporary chair based on the virtues of modern craft. it carries on the simplicity and honestly of the archetypical chair.")
+            Text(descriptionText)
                 .lineSpacing(8.0)
                 .opacity(0.6)
             
@@ -115,26 +115,6 @@ struct DescriptionView: View {
             }
             .padding(.vertical)
             
-            HStack {
-                
-                Button(action: {}) {
-                    Image(systemName: "minus")
-                        .padding(.all, 8)
-                    
-                }
-                .frame(width: 30, height: 30)
-                .overlay(RoundedCorner(radius: 50).stroke())
-                .foregroundColor(.black)
-                
-                Text("1")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                    .padding(.horizontal, 8)
-                
-                //                        Plus Button
-                
-                
-            }
         }
         .padding()
         .background(Color("Color2"))

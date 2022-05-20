@@ -35,7 +35,7 @@ class NetworkingProvider : APIServiceProtocol {
     
     
     func getSelectedDetails(index: Int, success: @escaping (_ flavorTextEntry: String?) -> (), failure: @escaping (_ error: Error?) -> () ) {
-        guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon-species/5") else { return }
+        guard let url = URL(string: "\(Service.detailedSpecies)\(index)") else { return }
         print("URL_________=\(url)")
         URLSession.shared.dataTask(with: url) { (data, _, error) in
             guard let data = data else { return }
